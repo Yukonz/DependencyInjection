@@ -2,7 +2,7 @@
 
 namespace Blog;
 
-class Container implements Psr\Container\ContainerInterface
+class Container
 {
     private array $objects = [];
 
@@ -20,7 +20,9 @@ class Container implements Psr\Container\ContainerInterface
 
     public function get(string $class_name) : mixed
     {
-        return isset($this->objects[$class_name]) ? $this->objects[$class_name]() : $this->create_object($class_name);
+        return isset($this->objects[$class_name]) ?
+                    $this->objects[$class_name]() :
+                    $this->create_object($class_name);
     }
 
     private function create_object(string $class_name): object
