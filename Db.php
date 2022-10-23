@@ -4,10 +4,12 @@ namespace Blog;
 
 class Db
 {
-    public wpdb $wpdb;
+    public $wpdb;
 
     public function __construct()
     {
-        $this->wpdb = new wpdb('username', 'password', 'database', 'localhost');
+        global $wpdb;
+
+        $this->wpdb = $wpdb;
     }
 }

@@ -20,7 +20,7 @@ class PostsController
         }
 
         if (empty($post_title)) {
-            throw new Exception('Post not found');
+            throw new \Exception('Post not found');
         }
 
         return $post_title;
