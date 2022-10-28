@@ -18,7 +18,7 @@ class Container
                      $this->create_object($class_name);
     }
 
-    private function create_object(string $class_name): object
+    private function create_object(string $class_name) : object
     {
         $reflector_class = new \ReflectionClass($class_name);
 
@@ -34,9 +34,31 @@ class Container
 
         $arguments = [];
         foreach ($constructor_args as $argument) {
-            $arguments[] = $this->get($argument->getType()->getName());
+            $item_name = $argument->getType()->getName();
+
+            if (interface_exists($item_name)) {
+                $available_classes = $this->list_classes_implementing_interface($item_name);
+
+                //TODO: implement class switching logic
+                $arguments[] = $this->get($available_classes[0]);
+            } else {
+                $arguments[] = $this->get($item_name);
+            }
         }
 
         return $this->objects[$class_name] = new $class_name(...$arguments);
+    }
+
+    private function list_classes_implementing_interface(string $interface_name) : array
+    {
+        $classes_list = [];
+
+        foreach (get_declared_classes() as $class_name) {
+            if (in_array($interface_name, class_implements($class_name))) {
+                $classes_list[] = $class_name;
+            }
+        }
+
+        return $classes_list;
     }
 }
