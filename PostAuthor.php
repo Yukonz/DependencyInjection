@@ -2,23 +2,38 @@
 
 namespace Blog;
 
-class PostAuthor implements IPost, IPostAuthor
+class PostAuthor implements IPostAuthor
 {
-    public int $post_id;
-    public int $author_id;
+    private int $author_id;
+    private string $author_name;
+    private string $author_email;
+    private string $date_registered;
 
-    public string $author_name;
-    public string $avatar_url;
-
-    public function get_all_post_data()
+    public function __construct(object $author_data)
     {
+        $this->author_id = $author_data->id;
+        $this->author_name = $author_data->user_name;
+        $this->author_email = $author_data->user_email;
+        $this->date_registered = $author_data->date_registered;
     }
 
-    public function get_author_name()
+    public function get_author_id() : int
     {
+        return $this->author_id;
     }
 
-    public function get_author_avatar()
+    public function get_author_name() : string
     {
+        return $this->author_name;
+    }
+
+    public function get_author_email() : string
+    {
+        return $this->author_email;
+    }
+
+    public function get_author_date_registered() : string
+    {
+        return $this->date_registered;
     }
 }

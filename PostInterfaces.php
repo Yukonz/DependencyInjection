@@ -4,7 +4,10 @@ namespace Blog;
 
 interface IPost
 {
-    public function get_all_post_data();
+    public function get_post_id();
+    public function get_post_date();
+    public function get_post_title();
+    public function get_post_content();
 }
 
 interface IPostActions
@@ -15,6 +18,8 @@ interface IPostActions
 
 interface IPostAuthor
 {
+    public function get_author_id();
     public function get_author_name();
-    public function get_author_avatar();
+    public function get_author_email();
+    public function get_author_date_registered();
 }

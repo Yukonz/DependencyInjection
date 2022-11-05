@@ -11,7 +11,7 @@ class PostsStorage
         $this->posts_source = $posts_source;
     }
 
-    public function get_post_by_id(int $post_id)
+    public function get_post_by_id(int $post_id) : Post
     {
         return $this->posts_source->get_post_by_id($post_id);
     }
@@ -24,24 +24,18 @@ class PostsStorage
 
 interface PostDataSource
 {
-    public function get_post_by_id(int $post_id);
-    public function get_recent_post_by_author_id(int $author_id);
-}
-
-class PostDataSourceMySQL implements PostDataSource
-{
-    public function get_post_by_id(int $post_id)
-    {
-        //Make API Call
-    }
-
-    public function get_recent_post_by_author_id(int $author_id)
-    {
-        //Make API Call
-    }
+    public function get_post_by_id(int $post_id) : Post;
 }
 
 class PostDataSourceAPI implements PostDataSource
+{
+    public function get_post_by_id(int $post_id) : Post
+    {
+        //Make API Call
+    }
+}
+
+class PostDataSourceMySQL implements PostDataSource
 {
     private Db $db;
 
@@ -50,18 +44,39 @@ class PostDataSourceAPI implements PostDataSource
         $this->db = $db;
     }
 
-    public function get_post_by_id(int $post_id) : string
+    public function get_post_by_id(int $post_id) : Post
     {
-        return (string)$this->db->wpdb->get_var("SELECT post_title 
-                                                 FROM {$this->db->wpdb->prefix}posts 
-                                                 WHERE ID = {$post_id}");
+        $post_data = $this->db->wpdb->get_var("SELECT id, post_date, post_title, post_content
+                                               FROM {$this->db->wpdb->prefix}posts 
+                                               WHERE ID = {$post_id}");
+
+        $post_data->post_editors = $this->get_post_editors($post_id);
+        $post_data->post_commentaries = $this->get_post_commentaries($post_id);
+
+        return new Post($post_data);
     }
 
-    public function get_recent_post_by_author_id(int $author_id) : string
+    private function get_post_editors(int $post_id) : array
     {
-        return (string)$this->db->wpdb->get_var("SELECT post_title 
-                                                 FROM {$this->db->wpdb->prefix}posts 
-                                                 WHERE post_author = {$author_id} 
-                                                 LIMIT 1");
+        $post_authors = $this->db->wpdb->get_results("SELECT ur.role_title, pe.user_id
+                                                      FROM {$this->db->wpdb->prefix}post_editors AS pe
+                                                      JOIN {$this->db->wpdb->prefix}user_roles AS ur
+                                                      ON pe.role_id = ur.id
+                                                      WHERE pe.post_id = {$post_id}");
+
+        $post_authors_arr = [];
+
+        foreach ($post_authors as $author) {
+            $post_authors_arr[$author->user_id] = $author->role_title;
+        }
+
+        return $post_authors_arr;
+    }
+
+    private function get_post_commentaries(int $post_id) : array
+    {
+        return $this->db->wpdb->get_col("SELECT comment_id
+                                         FROM {$this->db->wpdb->prefix}post_commentaries
+                                         WHERE post_id = {$post_id}");
     }
 }

@@ -11,18 +11,14 @@ class PostsController
         $this->posts_storage = $posts_storage;
     }
 
-    public function get_blog_record(int $record_id = 0, int $author_id = 0) : string
+    public function get_blog_record(int $post_id) : Post
     {
-        if ($record_id) {
-            $post_title = $this->posts_storage->get_post_by_id($record_id);
-        } elseif ($author_id) {
-            $post_title = $this->posts_storage->get_recent_post_by_author_id($author_id);
-        }
+        $post = $this->posts_storage->get_post_by_id($post_id);
 
-        if (empty($post_title)) {
+        if (!$post->get_post_id()) {
             throw new \Exception('Post not found');
         }
 
-        return $post_title;
+        return $post;
     }
 }
