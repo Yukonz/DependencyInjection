@@ -1,0 +1,10 @@
+{
+    "name": "test/php-learning-project",
+    "type": "php-application",
+    "description": "PHP/OOP/MySQL learning project",
+    "keywords": [
+        "php",
+        "mysql"
+    ],
+    "homepage": ""
+}

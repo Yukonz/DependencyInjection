@@ -16,22 +16,26 @@ class PostsStorage
         return $this->posts_source->get_post_by_id($post_id);
     }
 
-    public function get_recent_post_by_author_id($author_id)
+    public function list_posts() : array
     {
-        return $this->posts_source->get_recent_post_by_author_id($author_id);
+        return $this->posts_source->list_posts();
     }
 }
 
 interface PostDataSource
 {
+    public function list_posts() : array;
     public function get_post_by_id(int $post_id) : Post;
 }
 
 class PostDataSourceAPI implements PostDataSource
 {
+    public function list_posts() : array
+    {
+    }
+
     public function get_post_by_id(int $post_id) : Post
     {
-        //Make API Call
     }
 }
 
@@ -54,6 +58,12 @@ class PostDataSourceMySQL implements PostDataSource
         $post_data->post_commentaries = $this->get_post_commentaries($post_id);
 
         return new Post($post_data);
+    }
+
+    public function list_posts() : array
+    {
+        return $this->db->wpdb->get_col("SELECT id
+                                         FROM {$this->db->wpdb->prefix}posts");
     }
 
     private function get_post_editors(int $post_id) : array

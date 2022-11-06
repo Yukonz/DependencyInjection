@@ -21,4 +21,15 @@ class PostsController
 
         return $post;
     }
+
+    public function list_posts() : array
+    {
+        $posts = $this->posts_storage->list_posts();
+
+        if (!$posts) {
+            throw new \Exception('No posts found');
+        }
+
+        return $posts;
+    }
 }

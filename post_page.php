@@ -1,24 +1,9 @@
 <?php
 
-header("Cache-Control: no-store, no-cache, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
+require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php';
+require_once 'vendor/autoload.php';
 
-require $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php';
-
-require_once 'Db.php';
-require_once 'Post.php';
-require_once 'PostAuthor.php';
-require_once 'Commentary.php';
-require_once 'PostsStorage.php';
-require_once 'AuthorsStorage.php';
-require_once 'CommentariesStorage.php';
-require_once 'PostsController.php';
-require_once 'AuthorsController.php';
-require_once 'CommentariesController.php';
-require_once 'Container.php';
-
-$post_id = 123456;
+$post_id = (int)$_GET['post_id'];
 
 try {
     $container = new \Blog\Container();
@@ -42,7 +27,9 @@ get_header();
         <ul>
             <?php foreach ($post->get_post_editors() as $author_id => $role) { ?>
                 <li>
-                    <?= $role; ?>: <?= $authors_controller->get_author_details($author_id)->get_author_name(); ?>
+                    <a href="/author_page.php?author_id=<?= $author_id ?>">
+                        <?= $role; ?>: <?= $authors_controller->get_author_details($author_id)->get_author_name(); ?>
+                    </a>
                 </li>
             <?php } ?>
         </ul>
