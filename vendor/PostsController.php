@@ -32,4 +32,15 @@ class PostsController
 
         return $posts;
     }
+
+    public function list_posts_view() : array
+    {
+        $posts = $this->posts_storage->list_posts_view();
+
+        if (!$posts) {
+            throw new \Exception('No posts found');
+        }
+
+        return $posts;
+    }
 }
