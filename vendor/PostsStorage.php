@@ -61,7 +61,7 @@ class PostDataSourceMySQL implements PostDataSource
     public function get_post_by_id(int $post_id) : Post
     {
         $post_data = $this->db->wpdb->get_var("SELECT id, post_date, post_title, post_content
-                                               FROM {$this->db->wpdb->prefix}posts 
+                                               FROM posts 
                                                WHERE ID = {$post_id}");
 
         $post_data->post_editors = $this->get_post_editors($post_id);
@@ -72,7 +72,7 @@ class PostDataSourceMySQL implements PostDataSource
 
     public function list_posts() : array
     {
-        return $this->db->wpdb->get_col("SELECT id FROM {$this->db->wpdb->prefix}posts");
+        return $this->db->wpdb->get_col("SELECT id FROM posts");
     }
 
     public function list_posts_view() : array
@@ -97,21 +97,21 @@ class PostDataSourceMySQL implements PostDataSource
                                            COUNT(DISTINCT pe.user_id) - 1 AS editors,
                                            COUNT(DISTINCT pc.comment_id) AS comments,
                                            (SELECT u.user_name 
-                                            FROM {$this->db->wpdb->prefix}users AS u
-                                            JOIN {$this->db->wpdb->prefix}post_editors AS pe
+                                            FROM users AS u
+                                            JOIN post_editors AS pe
                                             ON u.id = pe.user_id
-                                            JOIN {$this->db->wpdb->prefix}user_roles AS ur
+                                            JOIN user_roles AS ur
                                             ON ur.id = pe.role_id
                                             WHERE pe.post_id = p.id
                                             AND ur.role_title = 'author') AS author
-                                    FROM {$this->db->wpdb->prefix}posts AS p
-                                    JOIN {$this->db->wpdb->prefix}post_editors AS pe
+                                    FROM posts AS p
+                                    JOIN post_editors AS pe
                                     ON p.id = pe.post_id
-                                    JOIN {$this->db->wpdb->prefix}users AS u
+                                    JOIN users AS u
                                     ON pe.user_id = u.id
-                                    JOIN {$this->db->wpdb->prefix}user_roles AS ur
+                                    JOIN user_roles AS ur
                                     ON pe.role_id = ur.id
-                                    JOIN {$this->db->wpdb->prefix}post_commentaries AS pc
+                                    JOIN post_commentaries AS pc
                                     ON p.id = pc.post_id
                                     GROUP BY p.id 
                                     ORDER BY p.post_date DESC");
@@ -120,8 +120,8 @@ class PostDataSourceMySQL implements PostDataSource
     private function get_post_editors(int $post_id) : array
     {
         $post_authors = $this->db->wpdb->get_results("SELECT ur.role_title, pe.user_id
-                                                      FROM {$this->db->wpdb->prefix}post_editors AS pe
-                                                      JOIN {$this->db->wpdb->prefix}user_roles AS ur
+                                                      FROM post_editors AS pe
+                                                      JOIN user_roles AS ur
                                                       ON pe.role_id = ur.id
                                                       WHERE pe.post_id = {$post_id}");
 
@@ -137,7 +137,54 @@ class PostDataSourceMySQL implements PostDataSource
     private function get_post_commentaries(int $post_id) : array
     {
         return $this->db->wpdb->get_col("SELECT comment_id
-                                         FROM {$this->db->wpdb->prefix}post_commentaries
+                                         FROM post_commentaries
                                          WHERE post_id = {$post_id}");
+    }
+
+    public function delete_post(int $post_id)
+    {
+        if (!$this->check_post_archiving_trigger_exists()) {
+            $this->create_post_archiving_trigger();
+        }
+
+        $this->db->wpdb->query("DELETE p, pe, pc, c
+                                FROM posts AS p
+                                JOIN post_editors AS pe
+                                ON p.id = pe.post_id
+                                JOIN post_commentaries AS pc
+                                ON p.id = pc.post_id
+                                JOIN commentaries AS c 
+                                ON pc.comment_id = c.id
+                                WHERE p.id = {$post_id}");
+    }
+
+    private function check_post_archiving_trigger_exists() : string
+    {
+        return (string)$this->db->wpdb->get_var("SHOW TRIGGERS LIKE 'post_archiving'");
+    }
+
+    private function create_post_archiving_trigger()
+    {
+        $this->db->wpdb->query("CREATE TRIGGER post_archiving
+                                BEFORE DELETE
+                                ON posts FOR EACH ROW
+                                INSERT INTO posts_archive (date_archived, post_id, post_date, post_title, post_content, post_authors, post_comments)
+                                SELECT NOW(), p.id, p.post_date, p.post_title, p.post_content,
+                                (SELECT JSON_ARRAYAGG(ur.role_title)
+                                 FROM post_editors AS pe
+                                 JOIN user_roles AS ur
+                                 ON pe.role_id = ur.id
+                                 WHERE pe.post_id = OLD.id
+                                 ORDER BY pe.role_id ASC
+                                 LIMIT 3),
+                                (SELECT JSON_ARRAYAGG(c.comment_content)
+                                 FROM commentaries AS c
+                                 JOIN post_commentaries AS pc
+                                 ON c.id = pc.comment_id
+                                 WHERE pc.post_id = OLD.id
+                                 ORDER BY c.id DESC
+                                 LIMIT 2)
+                                FROM posts AS p
+                                WHERE id = OLD.id");
     }
 }

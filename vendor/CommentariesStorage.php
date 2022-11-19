@@ -34,7 +34,7 @@ class CommentaryDataSourceMySQL implements CommentaryDataSource
     public function get_commentary_by_id(int $commentary_id) : Commentary
     {
         $commentary_data =  $this->db->wpdb->get_row("SELECT id, comment_date, comment_author, comment_content, comment_rating
-                                                      FROM {$this->db->wpdb->prefix}commentaries 
+                                                      FROM commentaries 
                                                       WHERE id = {$commentary_id}");
 
         return new Commentary($commentary_data);
