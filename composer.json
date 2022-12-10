@@ -6,5 +6,8 @@
         "php",
         "mysql"
     ],
-    "homepage": ""
+    "homepage": "https://www.dependency-injection.com",
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
 }
