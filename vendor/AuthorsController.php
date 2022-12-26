@@ -33,9 +33,13 @@ class AuthorsController
         return $author_posts;
     }
 
-    public function list_authors() : array
+    public function list_authors(string $search_string = '') : array
     {
-        $authors = $this->authors_storage->list_authors();
+        $authors = $this->authors_storage->list_authors($search_string);
+
+        if ($search_string && isset($authors[0]) && !$authors[0]) {
+            throw new \Exception('Author was deleted');
+        }
 
         if (!$authors) {
             throw new \Exception('No authors found');

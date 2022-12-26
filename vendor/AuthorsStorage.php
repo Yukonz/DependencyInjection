@@ -21,9 +21,14 @@ class AuthorsStorage
         return $this->authors_source->get_author_posts($author_id);
     }
 
-    public function list_authors() : array
+    public function list_authors(string $search_string = '') : array
     {
-        return $this->authors_source->list_authors();
+        return $this->authors_source->list_authors($search_string);
+    }
+
+    public function delete_author(int $author_id) : bool
+    {
+        return $this->authors_source->delete_author($author_id);
     }
 }
 
@@ -31,7 +36,8 @@ interface AuthorDataSource
 {
     public function get_author_by_id(int $author_id) : PostAuthor;
     public function get_author_posts(int $author_id) : array;
-    public function list_authors() : array;
+    public function list_authors(string $search_string = '') : array;
+    public function delete_author(int $author_id) : bool;
 }
 
 class AuthorDataSourceMySQL implements AuthorDataSource
@@ -43,8 +49,20 @@ class AuthorDataSourceMySQL implements AuthorDataSource
         $this->db = $db;
     }
 
-    public function list_authors() : array
+    public function list_authors(string $search_string = '') : array
     {
+        if (trim($search_string)) {
+            return $this->db->wpdb->get_col($this->db->wpdb->prepare("SELECT DISTINCT u.ID
+                                                                      FROM post_editors AS pe
+                                                                      LEFT JOIN users AS u
+                                                                      ON u.ID = pe.user_id
+                                                                      WHERE pe.user_id = %d
+                                                                      u.date_registered = %s
+                                                                      OR u.user_name = %s
+                                                                      OR u.user_email = %s
+                                                                      LIMIT 1", $search_string));
+        }
+
         return $this->db->wpdb->get_col("SELECT DISTINCT user_id
                                          FROM post_editors");
     }
@@ -63,8 +81,13 @@ class AuthorDataSourceMySQL implements AuthorDataSource
     public function get_author_posts(int $author_id) : array
     {
         return $this->db->wpdb->get_col("SELECT DISTINCT post_id
-                                         FROM pot_editors
+                                         FROM post_editors
                                          WHERE user_id = {$author_id}");
+    }
+
+    public function delete_author(int $author_id) : bool
+    {
+        return (bool)$this->db->wpdb->delete('users', ['id' => $author_id]);
     }
 
     private function get_author_commentaries(int $author_id) : array
