@@ -22,9 +22,9 @@ class PostsController
         return $post;
     }
 
-    public function list_posts() : array
+    public function list_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
     {
-        $posts = $this->posts_storage->list_posts();
+        $posts = $this->posts_storage->list_posts($search_string, $search_criteria, $date_from, $date_to);
 
         if (!$posts) {
             throw new \Exception('No posts found');

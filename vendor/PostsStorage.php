@@ -16,9 +16,9 @@ class PostsStorage
         return $this->posts_source->get_post_by_id($post_id);
     }
 
-    public function list_posts() : array
+    public function list_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
     {
-        return $this->posts_source->list_posts();
+        return $this->posts_source->list_posts($search_string, $search_criteria, $date_from, $date_to);
     }
 
     public function list_posts_view() : array
@@ -29,14 +29,14 @@ class PostsStorage
 
 interface PostDataSource
 {
-    public function list_posts() : array;
+    public function list_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array;
     public function get_post_by_id(int $post_id) : Post;
     public function list_posts_view() : array;
 }
 
 class PostDataSourceAPI implements PostDataSource
 {
-    public function list_posts() : array
+    public function list_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
     {
     }
 
@@ -70,9 +70,59 @@ class PostDataSourceMySQL implements PostDataSource
         return new Post($post_data);
     }
 
-    public function list_posts() : array
+    public function list_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
     {
-        return $this->db->wpdb->get_col("SELECT id FROM posts");
+        $date_filter_str = "";
+
+        if ($date_from) {
+            $date_from = date('Y-m-d', strtotime($date_from));
+            $date_filter_str .= "AND post_date >= '{$date_from}'";
+        }
+
+        if ($date_to) {
+            $date_to = date('Y-m-d', strtotime($date_to));
+            $date_filter_str .= "AND post_date <= '{$date_to}'";
+        }
+
+        $search_string = esc_sql(trim($search_string));
+
+        switch ($search_criteria) {
+            case 'author':
+                $authors_filter_str = "";
+                $authors_join_str = "";
+
+                if ($search_string) {
+                    $authors_join_str = "JOIN post_editors AS pe
+                                         ON p.id = pe.post_id
+                                         JOIN users AS u
+                                         ON u.id = pe.user_id";
+
+                    $authors_filter_str = "AND (u.user_name LIKE '%{$search_string}%'
+                                           OR u.user_email LIKE '%{$search_string}%')";
+                }
+
+                return $this->db->wpdb->get_col("SELECT id FROM posts AS p
+                                                 {$authors_join_str}
+                                                 WHERE 1
+                                                 {$date_filter_str}
+                                                 {$authors_filter_str}");
+
+            case 'post':
+                $posts_filter_str = "";
+
+                if ($search_string) {
+                    $posts_filter_str = "AND (post_title LIKE '%{$search_string}%' 
+                                         OR post_content LIKE '%{$search_string}%')";
+                }
+
+                return $this->db->wpdb->get_col("SELECT id FROM posts
+                                                 WHERE 1
+                                                 {$date_filter_str}
+                                                 {$posts_filter_str}");
+
+            default:
+                return [];
+        }
     }
 
     public function list_posts_view() : array

@@ -12,7 +12,7 @@ try {
         $authors_controller->delete_author((int)$_POST['delete_author']);
     }
 
-    $all_authors = $authors_controller->list_authors((string)$_POST['search_string']);
+    $all_authors = $authors_controller->list_authors();
 } catch (Exception $e) {
     echo 'Error: ' . $e->getMessage();
     die();
@@ -24,10 +24,6 @@ get_header();
 
 <div class="author-wrapper">
     <form method="post">
-        <div class="search_form">
-            <input type="search" value="" placeholder="Find authors..." name="search_string">
-            <button type="submit" name="search_author" value="1">Search</button>
-        </div>
         <?php foreach ($all_authors as $author_id) {
             $author = $authors_controller->get_author_details($author_id);
             $author_posts = $authors_controller->get_author_posts($author_id); ?>
