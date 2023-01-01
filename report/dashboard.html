@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\www\DependencyInjection\src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="_css/style.css" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">C:\www\DependencyInjection\src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AuthorsController.php.html#5">Blog\AuthorsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#5">Blog\AuthorsStorage</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#43">Blog\AuthorDataSourceMySQL</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentariesController.php.html#5">Blog\CommentariesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentariesStorage.php.html#5">Blog\CommentariesStorage</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentariesStorage.php.html#25">Blog\CommentaryDataSourceMySQL</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commentary.php.html#5">Blog\Commentary</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Post.php.html#5">Blog\Post</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAuthor.php.html#5">Blog\PostAuthor</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#62">Blog\PostDataSourceMySQL</a></td><td class="text-right">4%</td></tr>
+       <tr><td><a href="PostsController.php.html#5">Blog\PostsController</a></td><td class="text-right">23%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#5">Blog\PostsStorage</a></td><td class="text-right">40%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="PostsStorage.php.html#62">Blog\PostDataSourceMySQL</a></td><td class="text-right">752</td></tr>
+       <tr><td><a href="AuthorsController.php.html#5">Blog\AuthorsController</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#43">Blog\AuthorDataSourceMySQL</a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="PostsController.php.html#5">Blog\PostsController</a></td><td class="text-right">45</td></tr>
+       <tr><td><a href="CommentariesController.php.html#5">Blog\CommentariesController</a></td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AuthorsController.php.html#9"><abbr title="Blog\AuthorsController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsController.php.html#14"><abbr title="Blog\AuthorsController::get_author_details">get_author_details</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsController.php.html#25"><abbr title="Blog\AuthorsController::get_author_posts">get_author_posts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsController.php.html#36"><abbr title="Blog\AuthorsController::list_authors">list_authors</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsController.php.html#51"><abbr title="Blog\AuthorsController::delete_author">delete_author</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#9"><abbr title="Blog\AuthorsStorage::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#14"><abbr title="Blog\AuthorsStorage::get_author_by_id">get_author_by_id</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#19"><abbr title="Blog\AuthorsStorage::get_author_posts">get_author_posts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#24"><abbr title="Blog\AuthorsStorage::list_authors">list_authors</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#29"><abbr title="Blog\AuthorsStorage::delete_author">delete_author</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#47"><abbr title="Blog\AuthorDataSourceMySQL::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#52"><abbr title="Blog\AuthorDataSourceMySQL::list_authors">list_authors</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#58"><abbr title="Blog\AuthorDataSourceMySQL::get_author_by_id">get_author_by_id</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#76"><abbr title="Blog\AuthorDataSourceMySQL::get_author_posts">get_author_posts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#83"><abbr title="Blog\AuthorDataSourceMySQL::delete_author">delete_author</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#98"><abbr title="Blog\AuthorDataSourceMySQL::get_author_commentaries">get_author_commentaries</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#105"><abbr title="Blog\AuthorDataSourceMySQL::is_author_have_posts">is_author_have_posts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentariesController.php.html#9"><abbr title="Blog\CommentariesController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentariesController.php.html#14"><abbr title="Blog\CommentariesController::get_commentary_details">get_commentary_details</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentariesStorage.php.html#9"><abbr title="Blog\CommentariesStorage::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentariesStorage.php.html#14"><abbr title="Blog\CommentariesStorage::get_commentary_by_id">get_commentary_by_id</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentariesStorage.php.html#29"><abbr title="Blog\CommentaryDataSourceMySQL::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommentariesStorage.php.html#34"><abbr title="Blog\CommentaryDataSourceMySQL::get_commentary_by_id">get_commentary_by_id</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commentary.php.html#14"><abbr title="Blog\Commentary::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commentary.php.html#23"><abbr title="Blog\Commentary::get_commentary_date">get_commentary_date</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commentary.php.html#28"><abbr title="Blog\Commentary::get_commentary_author">get_commentary_author</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commentary.php.html#33"><abbr title="Blog\Commentary::get_commentary_content">get_commentary_content</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commentary.php.html#38"><abbr title="Blog\Commentary::get_commentary_rating">get_commentary_rating</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Container.php.html#9"><abbr title="Blog\Container::has">has</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Post.php.html#14"><abbr title="Blog\Post::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Post.php.html#24"><abbr title="Blog\Post::get_post_id">get_post_id</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Post.php.html#29"><abbr title="Blog\Post::get_post_date">get_post_date</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Post.php.html#34"><abbr title="Blog\Post::get_post_title">get_post_title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Post.php.html#39"><abbr title="Blog\Post::get_post_content">get_post_content</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Post.php.html#44"><abbr title="Blog\Post::get_post_editors">get_post_editors</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Post.php.html#49"><abbr title="Blog\Post::get_post_commentaries">get_post_commentaries</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAuthor.php.html#13"><abbr title="Blog\PostAuthor::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAuthor.php.html#22"><abbr title="Blog\PostAuthor::get_author_id">get_author_id</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAuthor.php.html#27"><abbr title="Blog\PostAuthor::get_author_name">get_author_name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAuthor.php.html#32"><abbr title="Blog\PostAuthor::get_author_email">get_author_email</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAuthor.php.html#37"><abbr title="Blog\PostAuthor::get_author_date_registered">get_author_date_registered</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostAuthor.php.html#42"><abbr title="Blog\PostAuthor::get_author_commentaries">get_author_commentaries</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsController.php.html#14"><abbr title="Blog\PostsController::get_blog_record">get_blog_record</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsController.php.html#36"><abbr title="Blog\PostsController::list_archived_posts">list_archived_posts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsController.php.html#47"><abbr title="Blog\PostsController::list_posts_view">list_posts_view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#14"><abbr title="Blog\PostsStorage::get_post_by_id">get_post_by_id</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#24"><abbr title="Blog\PostsStorage::list_posts_view">list_posts_view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#29"><abbr title="Blog\PostsStorage::list_archived_posts">list_archived_posts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#71"><abbr title="Blog\PostDataSourceMySQL::get_post_by_id">get_post_by_id</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#140"><abbr title="Blog\PostDataSourceMySQL::list_posts_view">list_posts_view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#149"><abbr title="Blog\PostDataSourceMySQL::check_list_posts_view_exists">check_list_posts_view_exists</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#154"><abbr title="Blog\PostDataSourceMySQL::create_list_posts_view">create_list_posts_view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#182"><abbr title="Blog\PostDataSourceMySQL::get_post_editors">get_post_editors</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#199"><abbr title="Blog\PostDataSourceMySQL::get_post_commentaries">get_post_commentaries</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#206"><abbr title="Blog\PostDataSourceMySQL::delete_post">delete_post</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#223"><abbr title="Blog\PostDataSourceMySQL::check_post_archiving_trigger_exists">check_post_archiving_trigger_exists</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#228"><abbr title="Blog\PostDataSourceMySQL::create_post_archiving_trigger">create_post_archiving_trigger</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PostsStorage.php.html#258"><abbr title="Blog\PostDataSourceMySQL::list_archived_posts">list_archived_posts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Container.php.html#14"><abbr title="Blog\Container::get">get</abbr></a></td><td class="text-right">66%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="PostsStorage.php.html#258"><abbr title="Blog\PostDataSourceMySQL::list_archived_posts">list_archived_posts</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="AuthorsController.php.html#36"><abbr title="Blog\AuthorsController::list_authors">list_authors</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="AuthorsStorage.php.html#58"><abbr title="Blog\AuthorDataSourceMySQL::get_author_by_id">get_author_by_id</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AuthorsController.php.html#14"><abbr title="Blog\AuthorsController::get_author_details">get_author_details</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AuthorsController.php.html#25"><abbr title="Blog\AuthorsController::get_author_posts">get_author_posts</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CommentariesController.php.html#14"><abbr title="Blog\CommentariesController::get_commentary_details">get_commentary_details</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Container.php.html#9"><abbr title="Blog\Container::has">has</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PostsController.php.html#14"><abbr title="Blog\PostsController::get_blog_record">get_blog_record</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PostsController.php.html#36"><abbr title="Blog\PostsController::list_archived_posts">list_archived_posts</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PostsController.php.html#47"><abbr title="Blog\PostsController::list_posts_view">list_posts_view</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PostsStorage.php.html#140"><abbr title="Blog\PostDataSourceMySQL::list_posts_view">list_posts_view</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PostsStorage.php.html#182"><abbr title="Blog\PostDataSourceMySQL::get_post_editors">get_post_editors</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PostsStorage.php.html#206"><abbr title="Blog\PostDataSourceMySQL::delete_post">delete_post</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Container.php.html#14"><abbr title="Blog\Container::get">get</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.2.19</a> using <a href="https://secure.php.net/" target="_top">PHP 8.1.12</a> and <a href="https://phpunit.de/">PHPUnit 9.5.27</a> at Sun Jan 1 15:47:04 UTC 2023.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/jquery.min.js" type="text/javascript"></script>
+  <script src="_js/d3.min.js" type="text/javascript"></script>
+  <script src="_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([9,1,0,1,0,1,0,0,0,1,0,1], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([58,0,0,0,0,0,0,1,1,0,1,7], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,11,"<a href=\"AuthorsController.php.html#5\">Blog\\AuthorsController<\/a>"],[0,5,"<a href=\"AuthorsStorage.php.html#5\">Blog\\AuthorsStorage<\/a>"],[0,9,"<a href=\"AuthorsStorage.php.html#43\">Blog\\AuthorDataSourceMySQL<\/a>"],[0,3,"<a href=\"CommentariesController.php.html#5\">Blog\\CommentariesController<\/a>"],[0,2,"<a href=\"CommentariesStorage.php.html#5\">Blog\\CommentariesStorage<\/a>"],[0,2,"<a href=\"CommentariesStorage.php.html#25\">Blog\\CommentaryDataSourceMySQL<\/a>"],[0,5,"<a href=\"Commentary.php.html#5\">Blog\\Commentary<\/a>"],[87.5,12,"<a href=\"Container.php.html#5\">Blog\\Container<\/a>"],[100,1,"<a href=\"Db.php.html#5\">Blog\\Db<\/a>"],[0,7,"<a href=\"Post.php.html#5\">Blog\\Post<\/a>"],[0,6,"<a href=\"PostAuthor.php.html#5\">Blog\\PostAuthor<\/a>"],[23.52941176470588,9,"<a href=\"PostsController.php.html#5\">Blog\\PostsController<\/a>"],[40,5,"<a href=\"PostsStorage.php.html#5\">Blog\\PostsStorage<\/a>"],[4.878048780487805,29,"<a href=\"PostsStorage.php.html#62\">Blog\\PostDataSourceMySQL<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"AuthorsController.php.html#9\">Blog\\AuthorsController::__construct<\/a>"],[0,2,"<a href=\"AuthorsController.php.html#14\">Blog\\AuthorsController::get_author_details<\/a>"],[0,2,"<a href=\"AuthorsController.php.html#25\">Blog\\AuthorsController::get_author_posts<\/a>"],[0,5,"<a href=\"AuthorsController.php.html#36\">Blog\\AuthorsController::list_authors<\/a>"],[0,1,"<a href=\"AuthorsController.php.html#51\">Blog\\AuthorsController::delete_author<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#9\">Blog\\AuthorsStorage::__construct<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#14\">Blog\\AuthorsStorage::get_author_by_id<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#19\">Blog\\AuthorsStorage::get_author_posts<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#24\">Blog\\AuthorsStorage::list_authors<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#29\">Blog\\AuthorsStorage::delete_author<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#47\">Blog\\AuthorDataSourceMySQL::__construct<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#52\">Blog\\AuthorDataSourceMySQL::list_authors<\/a>"],[0,3,"<a href=\"AuthorsStorage.php.html#58\">Blog\\AuthorDataSourceMySQL::get_author_by_id<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#76\">Blog\\AuthorDataSourceMySQL::get_author_posts<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#83\">Blog\\AuthorDataSourceMySQL::delete_author<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#98\">Blog\\AuthorDataSourceMySQL::get_author_commentaries<\/a>"],[0,1,"<a href=\"AuthorsStorage.php.html#105\">Blog\\AuthorDataSourceMySQL::is_author_have_posts<\/a>"],[0,1,"<a href=\"CommentariesController.php.html#9\">Blog\\CommentariesController::__construct<\/a>"],[0,2,"<a href=\"CommentariesController.php.html#14\">Blog\\CommentariesController::get_commentary_details<\/a>"],[0,1,"<a href=\"CommentariesStorage.php.html#9\">Blog\\CommentariesStorage::__construct<\/a>"],[0,1,"<a href=\"CommentariesStorage.php.html#14\">Blog\\CommentariesStorage::get_commentary_by_id<\/a>"],[0,1,"<a href=\"CommentariesStorage.php.html#29\">Blog\\CommentaryDataSourceMySQL::__construct<\/a>"],[0,1,"<a href=\"CommentariesStorage.php.html#34\">Blog\\CommentaryDataSourceMySQL::get_commentary_by_id<\/a>"],[0,1,"<a href=\"Commentary.php.html#14\">Blog\\Commentary::__construct<\/a>"],[0,1,"<a href=\"Commentary.php.html#23\">Blog\\Commentary::get_commentary_date<\/a>"],[0,1,"<a href=\"Commentary.php.html#28\">Blog\\Commentary::get_commentary_author<\/a>"],[0,1,"<a href=\"Commentary.php.html#33\">Blog\\Commentary::get_commentary_content<\/a>"],[0,1,"<a href=\"Commentary.php.html#38\">Blog\\Commentary::get_commentary_rating<\/a>"],[0,2,"<a href=\"Container.php.html#9\">Blog\\Container::has<\/a>"],[66.66666666666666,2,"<a href=\"Container.php.html#14\">Blog\\Container::get<\/a>"],[93.33333333333333,5,"<a href=\"Container.php.html#21\">Blog\\Container::create_object<\/a>"],[100,3,"<a href=\"Container.php.html#52\">Blog\\Container::list_classes_implementing_interface<\/a>"],[100,1,"<a href=\"Db.php.html#9\">Blog\\Db::__construct<\/a>"],[0,1,"<a href=\"Post.php.html#14\">Blog\\Post::__construct<\/a>"],[0,1,"<a href=\"Post.php.html#24\">Blog\\Post::get_post_id<\/a>"],[0,1,"<a href=\"Post.php.html#29\">Blog\\Post::get_post_date<\/a>"],[0,1,"<a href=\"Post.php.html#34\">Blog\\Post::get_post_title<\/a>"],[0,1,"<a href=\"Post.php.html#39\">Blog\\Post::get_post_content<\/a>"],[0,1,"<a href=\"Post.php.html#44\">Blog\\Post::get_post_editors<\/a>"],[0,1,"<a href=\"Post.php.html#49\">Blog\\Post::get_post_commentaries<\/a>"],[0,1,"<a href=\"PostAuthor.php.html#13\">Blog\\PostAuthor::__construct<\/a>"],[0,1,"<a href=\"PostAuthor.php.html#22\">Blog\\PostAuthor::get_author_id<\/a>"],[0,1,"<a href=\"PostAuthor.php.html#27\">Blog\\PostAuthor::get_author_name<\/a>"],[0,1,"<a href=\"PostAuthor.php.html#32\">Blog\\PostAuthor::get_author_email<\/a>"],[0,1,"<a href=\"PostAuthor.php.html#37\">Blog\\PostAuthor::get_author_date_registered<\/a>"],[0,1,"<a href=\"PostAuthor.php.html#42\">Blog\\PostAuthor::get_author_commentaries<\/a>"],[100,1,"<a href=\"PostsController.php.html#9\">Blog\\PostsController::__construct<\/a>"],[0,2,"<a href=\"PostsController.php.html#14\">Blog\\PostsController::get_blog_record<\/a>"],[75,2,"<a href=\"PostsController.php.html#25\">Blog\\PostsController::list_posts<\/a>"],[0,2,"<a href=\"PostsController.php.html#36\">Blog\\PostsController::list_archived_posts<\/a>"],[0,2,"<a href=\"PostsController.php.html#47\">Blog\\PostsController::list_posts_view<\/a>"],[100,1,"<a href=\"PostsStorage.php.html#9\">Blog\\PostsStorage::__construct<\/a>"],[0,1,"<a href=\"PostsStorage.php.html#14\">Blog\\PostsStorage::get_post_by_id<\/a>"],[100,1,"<a href=\"PostsStorage.php.html#19\">Blog\\PostsStorage::list_posts<\/a>"],[0,1,"<a href=\"PostsStorage.php.html#24\">Blog\\PostsStorage::list_posts_view<\/a>"],[0,1,"<a href=\"PostsStorage.php.html#29\">Blog\\PostsStorage::list_archived_posts<\/a>"],[100,1,"<a href=\"PostsStorage.php.html#66\">Blog\\PostDataSourceMySQL::__construct<\/a>"],[0,1,"<a href=\"PostsStorage.php.html#71\">Blog\\PostDataSourceMySQL::get_post_by_id<\/a>"],[100,8,"<a href=\"PostsStorage.php.html#83\">Blog\\PostDataSourceMySQL::list_posts<\/a>"],[0,2,"<a href=\"PostsStorage.php.html#140\">Blog\\PostDataSourceMySQL::list_posts_view<\/a>"],[0,1,"<a href=\"PostsStorage.php.html#149\">Blog\\PostDataSourceMySQL::check_list_posts_view_exists<\/a>"],[0,1,"<a href=\"PostsStorage.php.html#154\">Blog\\PostDataSourceMySQL::create_list_posts_view<\/a>"],[0,2,"<a href=\"PostsStorage.php.html#182\">Blog\\PostDataSourceMySQL::get_post_editors<\/a>"],[0,1,"<a href=\"PostsStorage.php.html#199\">Blog\\PostDataSourceMySQL::get_post_commentaries<\/a>"],[0,2,"<a href=\"PostsStorage.php.html#206\">Blog\\PostDataSourceMySQL::delete_post<\/a>"],[0,1,"<a href=\"PostsStorage.php.html#223\">Blog\\PostDataSourceMySQL::check_post_archiving_trigger_exists<\/a>"],[0,1,"<a href=\"PostsStorage.php.html#228\">Blog\\PostDataSourceMySQL::create_post_archiving_trigger<\/a>"],[0,8,"<a href=\"PostsStorage.php.html#258\">Blog\\PostDataSourceMySQL::list_archived_posts<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

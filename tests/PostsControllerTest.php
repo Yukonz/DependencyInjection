@@ -12,6 +12,7 @@ class PostsControllerTest extends TestCase
 
     public function setUp() : void
     {
+
         $this->container = new \Blog\Container();
         $this->posts_controller = $this->container->get(\Blog\PostsController::class);
     }
@@ -20,7 +21,7 @@ class PostsControllerTest extends TestCase
     {
         $search_text = 'Existed Post';
         $search_criteria = 'post';
-        
+
         $test_result = $this->posts_controller->list_posts($search_text, $search_criteria);
 
         $this->assertTrue(is_array($test_result) && !empty($test_result));
@@ -33,7 +34,7 @@ class PostsControllerTest extends TestCase
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No posts found');
-        
+
         $this->posts_controller->list_posts($search_text, $search_criteria);
     }
 

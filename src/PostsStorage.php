@@ -40,25 +40,6 @@ interface PostDataSource
     public function list_archived_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array;
 }
 
-class PostDataSourceAPI implements PostDataSource
-{
-    public function list_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
-    {
-    }
-
-    public function get_post_by_id(int $post_id) : Post
-    {
-    }
-
-    public function list_posts_view() : array
-    {
-    }
-
-    public function list_archived_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
-    {
-    }
-}
-
 class PostDataSourceMySQL implements PostDataSource
 {
     private Db $db;
@@ -298,5 +279,24 @@ class PostDataSourceMySQL implements PostDataSource
             default:
                 return [];
         }
+    }
+}
+
+class PostDataSourceAPI implements PostDataSource
+{
+    public function list_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
+    {
+    }
+
+    public function get_post_by_id(int $post_id) : Post
+    {
+    }
+
+    public function list_posts_view() : array
+    {
+    }
+
+    public function list_archived_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
+    {
     }
 }

@@ -9,5 +9,10 @@
     "homepage": "https://www.dependency-injection.com",
     "require-dev": {
         "phpunit/phpunit": "^9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Blog\\": "src/"
+        }
     }
 }

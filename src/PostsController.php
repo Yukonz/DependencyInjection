@@ -26,7 +26,7 @@ class PostsController
     {
         $posts = $this->posts_storage->list_posts($search_string, $search_criteria, $date_from, $date_to);
 
-        if (!$posts) {
+        if (empty($posts)) {
             throw new \Exception('No posts found');
         }
 
