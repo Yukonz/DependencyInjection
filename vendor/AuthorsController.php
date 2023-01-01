@@ -16,7 +16,7 @@ class AuthorsController
         $post_author = $this->authors_storage->get_author_by_id($author_id);
 
         if (!$post_author->get_author_id()) {
-            throw new \Exception('Author not found');
+            throw new \Exception('Author has been deleted');
         }
 
         return $post_author;

@@ -25,6 +25,11 @@ class PostsStorage
     {
         return $this->posts_source->list_posts_view();
     }
+
+    public function list_archived_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
+    {
+        return $this->posts_source->list_archived_posts($search_string, $search_criteria, $date_from, $date_to);
+    }
 }
 
 interface PostDataSource
@@ -32,6 +37,7 @@ interface PostDataSource
     public function list_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array;
     public function get_post_by_id(int $post_id) : Post;
     public function list_posts_view() : array;
+    public function list_archived_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array;
 }
 
 class PostDataSourceAPI implements PostDataSource
@@ -45,6 +51,10 @@ class PostDataSourceAPI implements PostDataSource
     }
 
     public function list_posts_view() : array
+    {
+    }
+
+    public function list_archived_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
     {
     }
 }
@@ -220,8 +230,13 @@ class PostDataSourceMySQL implements PostDataSource
                                 ON posts FOR EACH ROW
                                 INSERT INTO posts_archive (date_archived, post_id, post_date, post_title, post_content, post_authors, post_comments)
                                 SELECT NOW(), p.id, p.post_date, p.post_title, p.post_content,
-                                (SELECT JSON_ARRAYAGG(ur.role_title)
+                                (SELECT JSON_ARRAYAGG(JSON_OBJECT('user_id', u.id, 
+                                                                  'role', ur.role_title,
+                                                                  'name', u.name,
+                                                                  'email', u.email))
                                  FROM post_editors AS pe
+                                 JOIN users AS u
+                                 ON pe.user_id = u.id
                                  JOIN user_roles AS ur
                                  ON pe.role_id = ur.id
                                  WHERE pe.post_id = OLD.id
@@ -236,5 +251,52 @@ class PostDataSourceMySQL implements PostDataSource
                                  LIMIT 2)
                                 FROM posts AS p
                                 WHERE id = OLD.id");
+    }
+
+    public function list_archived_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
+    {
+        $date_filter_str = "";
+
+        if ($date_from) {
+            $date_from = date('Y-m-d', strtotime($date_from));
+            $date_filter_str .= "AND post_date >= '{$date_from}'";
+        }
+
+        if ($date_to) {
+            $date_to = date('Y-m-d', strtotime($date_to));
+            $date_filter_str .= "AND post_date <= '{$date_to}'";
+        }
+
+        $search_string = esc_sql(trim($search_string));
+
+        switch ($search_criteria) {
+            case 'author':
+                $authors_filter_str = "";
+
+                if ($search_string) {
+                    $authors_filter_str = "AND post_authors LIKE '%{$search_string}%'";
+                }
+
+                return $this->db->wpdb->get_results("SELECT * FROM posts_archive
+                                                     WHERE 1
+                                                     {$date_filter_str}
+                                                     {$authors_filter_str}");
+
+            case 'post':
+                $posts_filter_str = "";
+
+                if ($search_string) {
+                    $posts_filter_str = "AND (post_title LIKE '%{$search_string}%' 
+                                         OR post_content LIKE '%{$search_string}%')";
+                }
+
+                return $this->db->wpdb->get_results("SELECT * FROM posts_archive
+                                                     WHERE 1
+                                                     {$date_filter_str}
+                                                     {$posts_filter_str}");
+
+            default:
+                return [];
+        }
     }
 }

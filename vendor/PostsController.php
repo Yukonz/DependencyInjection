@@ -33,6 +33,17 @@ class PostsController
         return $posts;
     }
 
+    public function list_archived_posts(string $search_string = '', string $search_criteria = 'post', string $date_from = '', string $date_to = '') : array
+    {
+        $archived_posts = $this->posts_storage->list_archived_posts($search_string, $search_criteria, $date_from, $date_to);
+
+        if (!$archived_posts) {
+            throw new \Exception('No archived posts found');
+        }
+
+        return $archived_posts;
+    }
+
     public function list_posts_view() : array
     {
         $posts = $this->posts_storage->list_posts_view();
