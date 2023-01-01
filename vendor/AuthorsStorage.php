@@ -26,9 +26,9 @@ class AuthorsStorage
         return $this->authors_source->list_authors();
     }
 
-    public function delete_author(int $author_id) : bool
+    public function delete_author(int $author_id)
     {
-        return $this->authors_source->delete_author($author_id);
+        $this->authors_source->delete_author($author_id);
     }
 }
 
@@ -37,7 +37,7 @@ interface AuthorDataSource
     public function get_author_by_id(int $author_id) : PostAuthor;
     public function get_author_posts(int $author_id) : array;
     public function list_authors() : array;
-    public function delete_author(int $author_id) : bool;
+    public function delete_author(int $author_id);
 }
 
 class AuthorDataSourceMySQL implements AuthorDataSource
@@ -80,9 +80,19 @@ class AuthorDataSourceMySQL implements AuthorDataSource
                                          WHERE user_id = {$author_id}");
     }
 
-    public function delete_author(int $author_id) : bool
+    public function delete_author(int $author_id)
     {
-        return (bool)$this->db->wpdb->delete('users', ['id' => $author_id]);
+        $this->db->wpdb->query("DELETE users, post_editors, commentaries, post_commentaries, author_commentaries
+                                FROM users AS u
+                                LEFT JOIN post_editors AS pe
+                                ON u.id = pe.user_id
+                                LEFT JOIN commentaries AS c
+                                ON u.id = c.comment_author
+                                LEFT JOIN post_commentaries AS pc
+                                ON c.id = pc.comment_id
+                                LEFT JOIN author_commentaries AS ac
+                                ON c.id = ac.comment_id
+                                WHERE u.id = {$author_id}");
     }
 
     private function get_author_commentaries(int $author_id) : array

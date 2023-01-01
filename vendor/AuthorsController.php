@@ -47,4 +47,9 @@ class AuthorsController
 
         return $authors;
     }
+
+    public function delete_author(int $author_id)
+    {
+        $this->authors_storage->delete_author($author_id);
+    }
 }
